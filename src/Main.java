@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,7 +34,8 @@ public class Main {
 
 
         Collections.sort(genes);
-        Collections.sort(genesa);
+
+        //Collections.sort(genesa);
 
         System.out.println(genes);
         LinkedList<Gene>[] groupedGenes= group(genes);
@@ -118,7 +118,7 @@ public class Main {
         try {
             inFile = new BufferedReader(new FileReader(filename));
             ArrayList<Gene> genes=new ArrayList<>();
-            inFile.readLine();
+            inFile.readLine();   //delete first line
             while ((line = inFile.readLine()) != null) {
                 String[] attributes=line.split("\t");
                 int gene_id=Integer.parseInt(attributes[1]);

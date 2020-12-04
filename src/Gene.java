@@ -65,83 +65,96 @@ public class Gene implements Comparable <Gene>{
     public int compareTo(Gene g) {
 
 
-        if(this.getChromosome()>g.getChromosome()){
-            return +1;
-        }
-        else if(this.getChromosome()==g.getChromosome()){
-            return 0;
-        }
-        else{
-            return-1;
-        }
+//        if(this.getChromosome()>g.getChromosome()){
+//            return +1;
+//        }
+//        else if(this.getChromosome()==g.getChromosome()){
+//            return 0;
+//        }
+//        else{
+//            return-1;
+//        }
 
 //
-//        String[] zelf_chromosoom;
-//        String[] ander_chromosoom;
-//        String zelf_chromosoom_part2=null;
-//        String ander_chromosoom_part2=null;
-//        System.out.println("ik kom hier langs "+this.getChromosome_map_location()+"\t"+g.getChromosome_map_location());
-//
-//
-//        if(this.getChromosome_map_location().contains("|")){
-//            zelf_chromosoom=this.getChromosome_map_location().split("\\|")[0].split("p|q");
-//
-//        }
-//
-//        else if(this.getChromosome_map_location().contains("-")){
-//            zelf_chromosoom =this.getChromosome_map_location().split("-")[0].split("p|q");
-//
-//        }
-//        else {
-//            zelf_chromosoom =this.getChromosome_map_location().split("p|q");
-//        }
-//
-//        if(g.getChromosome_map_location().contains("|")){
-//            ander_chromosoom =g.getChromosome_map_location().split("\\|")[0].split("p|q");
-//        }
-//        else if(g.getChromosome_map_location().contains("-")){
-//            ander_chromosoom =g.getChromosome_map_location().split("-")[0].split("p|q");
-//        }
-//        else {
-//            ander_chromosoom =g.getChromosome_map_location().split("p|q");
-//        }
-//
-//        if (this.getChromosome_map_location().equals(g.getChromosome_map_location())){
-//            return 0; }
-//
-//        else if (this.getChromosome()> g.getChromosome()){
-//            if(zelf_chromosoom[1].contains(".")){
-//            zelf_chromosoom_part2=zelf_chromosoom[1].split("\\.")[0];}
-//            if(zelf_chromosoom[1].contains("-")){
-//
-//                zelf_chromosoom_part2=zelf_chromosoom[1].replace("-","");
-//                System.out.println(zelf_chromosoom_part2);
-//            }
-//            if(!zelf_chromosoom[1].contains(".")&&!zelf_chromosoom[1].contains("-")){
-//            zelf_chromosoom_part2=zelf_chromosoom[1];}
-//
-//
-//            if(ander_chromosoom[1].contains(".")){
-//                ander_chromosoom_part2=ander_chromosoom[1].split("\\.")[0];}
-//            if(ander_chromosoom[1].contains("-")){
-//                ander_chromosoom_part2=ander_chromosoom[1].replace("-","");
-//                System.out.println("ik kom hier langs "+this.getChromosome_map_location()+"\t"+g.getChromosome_map_location());
-//
-//            }
-//            if(!ander_chromosoom[1].contains(".")&&!ander_chromosoom[1].contains("-")){
-//                ander_chromosoom_part2=ander_chromosoom[1];
-//            }
-//
-//
-//           if(Integer.parseInt(zelf_chromosoom_part2)>Integer.parseInt(ander_chromosoom_part2)){
-//                return +1;
-//            }
-//            else{
-//                return -1;
-//             }}
-//
-//
-//        else {return -1;}
+        String[] zelf_chromosoom;
+        String[] ander_chromosoom;
+        String zelf_chromosoom_part2=null;
+        String ander_chromosoom_part2=null;
+        System.out.println("ik kom hier langs "+this.getChromosome_map_location()+"\t"+g.getChromosome_map_location());
+
+
+        if(this.getChromosome_map_location().contains("|")){
+            zelf_chromosoom=this.getChromosome_map_location().split("\\|")[0].split("p|q");
+            System.out.println("test1 ");
+        }
+
+        else if(this.getChromosome_map_location().contains("-")){
+            zelf_chromosoom =this.getChromosome_map_location().split("-")[0].split("p|q");
+            System.out.println("test2");
+        }
+        else {
+            zelf_chromosoom =this.getChromosome_map_location().split("p|q");
+            System.out.println("test3");
+        }
+
+        if(g.getChromosome_map_location().contains("|")){
+            ander_chromosoom =g.getChromosome_map_location().split("\\|")[0].split("p|q");
+            System.out.println("test4");
+        }
+        else if(g.getChromosome_map_location().contains("-")){
+            ander_chromosoom =g.getChromosome_map_location().split("-")[0].split("p|q");
+            System.out.println("test5");
+        }
+        else {
+            ander_chromosoom =g.getChromosome_map_location().split("p|q");
+            System.out.println("test6");
+        }
+
+        if (this.getChromosome_map_location().equals(g.getChromosome_map_location())){
+            System.out.println("test7");
+            return 0;
+            }
+
+        else if (this.getChromosome()> g.getChromosome()){
+            if(zelf_chromosoom.length==0||ander_chromosoom.length==0){
+                System.out.println("testoo");
+                return +1;
+            }
+            System.out.println("test8");
+            if(zelf_chromosoom[1].contains(".")){
+            zelf_chromosoom_part2=zelf_chromosoom[1].split("\\.")[0];}
+            if(zelf_chromosoom[1].contains("-")){
+
+                zelf_chromosoom_part2=zelf_chromosoom[1].replace("-","");
+                System.out.println(zelf_chromosoom_part2);
+            }
+            if(!zelf_chromosoom[1].contains(".")&&!zelf_chromosoom[1].contains("-")){
+            zelf_chromosoom_part2=zelf_chromosoom[1];}
+
+
+            if(ander_chromosoom[1].contains(".")){
+                ander_chromosoom_part2=ander_chromosoom[1].split("\\.")[0];}
+            if(ander_chromosoom[1].contains("-")){
+                ander_chromosoom_part2=ander_chromosoom[1].replace("-","");
+                System.out.println("ik kom hier langs "+this.getChromosome_map_location()+"\t"+g.getChromosome_map_location());
+
+            }
+            if(!ander_chromosoom[1].contains(".")&&!ander_chromosoom[1].contains("-")){
+                ander_chromosoom_part2=ander_chromosoom[1];
+            }
+
+
+           if(Integer.parseInt(zelf_chromosoom_part2)>Integer.parseInt(ander_chromosoom_part2)){
+                return +1;
+            }
+            else{
+                return -1;
+             }}
+
+
+        else {System.out.println("test 9");
+            return -1;
+            }
     }
 
 
