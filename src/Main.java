@@ -12,43 +12,54 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // the name of the file name with the information of all the genes of the homo sapiens
         String filename="C:\\Users\\ddunn\\IdeaProjects\\j2b2w2opdracht2\\src\\Homo_sapiens.gene_info";
 
+        // this measures the time it takes to read in the file and stores the information in a linkedlist
         long start_linked_read = System.nanoTime();
         LinkedList<Gene> genes= readFile(filename);
         long end_linked_read=System.nanoTime();
 
+        //this measures the time it takes to read in the file and stores the information in a Arraylist
         long start_array_read =System.nanoTime();
         ArrayList<Gene> genesa = readFileArray(filename);
         long end_array_read=System.nanoTime();
 
-        System.out.println(genes);
-
+        //this measures the time it takes to select a gene out of a linked list
         long start_linked_select =System.nanoTime();
         Gene item_out_linked= genes.get(6);
         long end_linked_select=System.nanoTime();
 
+        //this measures the time it takes to select a gene out od arraylist
         long start_array_select = System.nanoTime();
         Gene item_out_array =genes.get(6);
         long end_array_select=System.nanoTime();
 
-
+        //this sorts the genes in the linkedlist
         Collections.sort(genes);
+        //this sorts the genes in the arraylist
+        Collections.sort(genesa);
 
-        //Collections.sort(genesa);
-
-        System.out.println(genes);
+        //this groups the Genes in the linkedlist
         LinkedList<Gene>[] groupedGenes= group(genes);
+        //this groups the Genes in the arraylist
         ArrayList<Gene>[] groupedGenesA =group(genesa);
 
+        //this prints a array of linkedlists grouped per chromosoom
         System.out.println(Arrays.toString(groupedGenes));
 
+        //this prints a array of Arraylists grouped per chromosoom
+        System.out.println(Arrays.toString(groupedGenesA));
+
+        //this calculates all the end times that were measured in the script
         long time_linked_read= end_linked_read-start_linked_read;
         long time_array_read=end_array_read-start_array_read;
         long time_linked_select=end_linked_select-start_linked_select;
         long time_array_select= end_array_select-start_array_select;
+        //prints out all the times
         System.out.println(time_linked_read+"\n"+time_array_read+"\n" +time_linked_select+"\n"+time_array_select);
     }
+
 
     public static LinkedList<Gene>[] group(LinkedList<Gene> genes){
         LinkedList[] result = new LinkedList[25];
