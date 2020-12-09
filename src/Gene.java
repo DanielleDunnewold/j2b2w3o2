@@ -1,5 +1,4 @@
-import javax.swing.*;
-import java.util.Arrays;
+
 
 public class Gene implements Comparable <Gene>{
 
@@ -12,68 +11,129 @@ public class Gene implements Comparable <Gene>{
     public Gene(int gene_id, String symbol, String chromosome_map_location, String Chromosoom) {
         this.gene_id = gene_id;
         this.symbol = symbol;
-        setChromosome_map_location(chromosome_map_location);
+        this.Chromosome_map_location = chromosome_map_location;;
         setChromosome(Chromosoom);
         amount++;
     }
 
+    /**
+     * gets the gene id
+     * @return gene_id int id of the Gene
+     */
     public int getGene_id() {
         return gene_id;
     }
 
+    /**
+     * sets the gene id
+     * @param gene_id int, id of the gene
+     */
     public void setGene_id(int gene_id) {
         this.gene_id = gene_id;
     }
 
+    /**
+     * gets the symbol of the gene
+     * @return symbol, String symbol of the gene
+     */
     public String getSymbol() {
         return symbol;
     }
 
+    /**
+     * sets the symbol of the gene
+     * @param symbol, string symbol of the gene
+     */
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
+    /**
+     * gets the chromosome map location
+     * @return Cromosome_map_location, string the chromosome map location of the gene
+     */
     public String getChromosome_map_location() {
         return Chromosome_map_location;
     }
 
+    /**
+     * set the chromosome map location
+     * @param chromosome_map_location, string the chromomsoem map location of the gene
+     */
     public void setChromosome_map_location(String chromosome_map_location) {
-        if(chromosome_map_location.equals("-")){
-            Chromosome_map_location = "0p0";
-        }
-        else{Chromosome_map_location = chromosome_map_location;} }
+        Chromosome_map_location = chromosome_map_location;}
 
+    /**
+     * get the chromosome number of the gene
+      * @return Chromosome, int number of the chromosome the gene lays on
+     */
     public int getChromosome() {
         return Chromosome;
     }
 
+    /**
+     * sets the chromsome number of the gene
+     * @param chromosome, int number of the chromsome the gene is located on
+     */
     public void setChromosome(String chromosome) {
+        // checks if the chromosoom is X or Y and give the chromsome the right number(so it can be ordered easy later on
         if (chromosome.equals("X")){
             this.Chromosome=23; }
         else if (chromosome.equals("Y")){
             this.Chromosome=24; }
-        else if (chromosome.equals("-")||chromosome.contains("|")||chromosome.equals("Un")){
+
+        //if the chromosome is - or un there is no known and it would be set to 0
+        else if (chromosome.equals("-")||chromosome.equals("Un")){
             this.Chromosome=0;
         }
+
+        // if the chromsome number contains a | the first number gets stored
+        else if (chromosome.contains("|")){
+            //if this is a x or y the number 23 or 24 is given to the value
+            if(chromosome.split("\\|")[0].equals("X")){
+                this.Chromosome=23;
+            }
+            else if(chromosome.split("\\|")[0].equals("Y")){
+                this.Chromosome=24;
+            }
+            else{
+            this.Chromosome= Integer.parseInt(chromosome.split("\\|")[0]);}
+        }
+        //if it is on the mitochondrial the number 25 is given so it gets easier ordered
         else if (chromosome.equals("MT")){
             this.Chromosome=25;
         }
+        // if it is just a integer it gets conferted to a integer and that gets stored
         else{
-        this.Chromosome = Integer.parseInt(chromosome);}
+        this.Chromosome = Integer.parseInt(chromosome); }
     }
 
 
+    /**
+     * overwrites the tostring method and prints the value of the chromosome map location
+     * @return the chromsome map location
+     */
     public String toString(){
         return String.valueOf(getChromosome_map_location());
     }
 
+    /**
+     * this function uses the compare to interface and compares the diffrent chromosomes so it can be filtered
+     * @param g an other gene this gene gets compared to
+     * @return a +1 when this chromosoom is higher,
+     * a 0 when they are equal and
+     * a -1 when this gene is lower than the other
+     */
     public int compareTo(Gene g) {
+        //when this chromosoom number is higher than the other +1 is returned
         if(this.getChromosome()>g.getChromosome()){
             return +1;
         }
+        //when this chromosoom and the other are the same 0 is returned
         else if(this.getChromosome()==g.getChromosome()){
             return 0;
         }
+        //otherwise this chromosoom has to be lower tha  the other so -1 is returned
         else{
             return-1;
         }}
@@ -159,7 +219,7 @@ public class Gene implements Comparable <Gene>{
 //            return -1;
 //            }
 //    }
-//
+
 
 
 

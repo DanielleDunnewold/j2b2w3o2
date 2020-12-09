@@ -60,25 +60,44 @@ public class Main {
         System.out.println(time_linked_read+"\n"+time_array_read+"\n" +time_linked_select+"\n"+time_array_select);
     }
 
-
+    /**
+     * This function groups the data in the linkedlist on basis of Chromosomes
+     * @param genes a linkedlist with the sorted information of the human genes
+     * @return A array with linkedlists, each linkedlist containing the genes of one chromosome
+     */
     public static LinkedList<Gene>[] group(LinkedList<Gene> genes){
-        LinkedList[] result = new LinkedList[25];
+        LinkedList[] result = new LinkedList[25];  // makes s linked list with 25 places
+        //repeats the process 25 times
         for(int j=0;j<25;j++){
+            //initieerd a temporary list that is going to be added to the result
             LinkedList<Gene> temp = new LinkedList<>();
+            //intieerd a new linkedlist in the array
             result[j]=new LinkedList<Gene>();
+            //loops through all the genes
             for (Gene gene : genes) {
+                //checks if the gene is the same as j (an thus need to be in the list where are filling now)
                 if (gene.getChromosome() == j) {
-                    temp.add(gene);
+                    temp.add(gene);// gets add the to the temporary list
                 }
             }
-        result[j].add(temp);}
+        result[j].add(temp);} // add the temporary list to array of linkedlists
 
         return result; }
 
+
+    /**
+     * This function groups the data in the arraylist on basis of Chromosomes
+     * @param genes a arraylist with the sorted information of the human genes
+     * @return A array with arraylists, each arraylist containing the genes of one chromosome
+     */
     public static ArrayList<Gene>[] group(ArrayList<Gene> genes){
-        ArrayList[] result = new ArrayList[25];
+        ArrayList[] result = new ArrayList[25]; // makes a array with place for 25 arraylists
+        // repeats the process 25 times (for the amount of diffrent chromosones
+        // including the mitochondrial and X and Y chromosomes)
         for(int j=0;j<25;j++){
-            LinkedList<Gene> temp = new LinkedList<>();
+            //initieerd a temporary list that is going to be added to the result
+            ArrayList<Gene> temp = new ArrayList<>();
+            // initieerd a new arraylist in the array
             result[j]=new ArrayList<Gene>();
             for (Gene gene : genes) {
                 if (gene.getChromosome() == j) {
@@ -90,19 +109,27 @@ public class Main {
         return result; }
 
 
+    /**
+     * read in the file, makes a object per line and adds these in a Linkedlist
+     * @param filename name of the file containing the information
+     * @return genes, a Linkedlist with the Genes contianing the information
+     */
     public static LinkedList<Gene> readFile(String filename) {
         String line;
         BufferedReader inFile = null;
         try {
             inFile = new BufferedReader(new FileReader(filename));
             LinkedList<Gene> genes=new LinkedList<>();
-            inFile.readLine();
+            inFile.readLine(); //reads the first line so it gets skipped
+            //loops through the rest of the file
             while ((line = inFile.readLine()) != null) {
-                String[] attributes=line.split("\t");
+                String[] attributes=line.split("\t");  //split each line on tab
+                //get the gen_id, symbol, chromosome map location and chromosoom out of this array
                 int gene_id=Integer.parseInt(attributes[1]);
                 String symbol= attributes[2];
                 String Chromosome_map_location =attributes[7];
                 String Chromosoom= attributes[6];
+                // makes a new gene with this information and adds this gene to a Linkedlist
                 genes.add(new Gene(gene_id,symbol,Chromosome_map_location,Chromosoom));
             }
             return genes;
@@ -123,6 +150,11 @@ public class Main {
         }
     }
 
+    /**
+     * read in the file, makes a object per line and adds these in a Arraylist
+     * @param filename name of the file containing the information
+     * @return genes, a Arraylist with the Genes contianing the information
+     */
     public static ArrayList<Gene> readFileArray(String filename) {
         String line;
         BufferedReader inFile = null;
@@ -130,12 +162,15 @@ public class Main {
             inFile = new BufferedReader(new FileReader(filename));
             ArrayList<Gene> genes=new ArrayList<>();
             inFile.readLine();   //delete first line
+            //loops through the rest of the file
             while ((line = inFile.readLine()) != null) {
-                String[] attributes=line.split("\t");
+                String[] attributes=line.split("\t");// split each line on the tab
+                //get the gen_id, symbol, chromosome map location and chromosoom out of this array
                 int gene_id=Integer.parseInt(attributes[1]);
                 String symbol= attributes[2];
                 String Chromosome_map_location =attributes[7];
                 String Chromosoom= attributes[6];
+                // makes a new gene with this information and adds this gene to a Arraylist
                 genes.add(new Gene(gene_id,symbol,Chromosome_map_location,Chromosoom));
             }
             return genes;
